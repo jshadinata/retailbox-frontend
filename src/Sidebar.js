@@ -1,18 +1,24 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import SettingsIcon from '@material-ui/icons/Settings';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import {
+	Grid, 
+	Box,
+	Avatar, 
+	Typography,
+	List, 
+	MenuItem, 
+	ListItemIcon, 
+	ListItemText, 
+	Divider,
+} from '@material-ui/core';
+import {
+	Settings as SettingsIcon,
+	Assignment as AssignmentIcon,
+	AssignmentOutlined as AssignmentOutlinedIcon,
+	LocalMall as LocalMallIcon,
+	Home as HomeIcon,
+} from '@material-ui/icons';
 
 const useStyles = makeStyles({
 	companyLogo : {
@@ -36,25 +42,29 @@ function Sidebar() {
 			</Box>
 			<Divider />
 			<List>
-				<ListItem button>
+				<MenuItem component={Link} to='/'>
+					<ListItemIcon><HomeIcon /></ListItemIcon>
+					<ListItemText primary="Dashboard" />
+				</MenuItem>
+				<MenuItem component={Link} to='/sales'>
 					<ListItemIcon><AssignmentIcon /></ListItemIcon>
 					<ListItemText primary="Penjualan" />
-				</ListItem>
-				<ListItem button>
+				</MenuItem>
+				<MenuItem component={Link} to='/purchase'>
 					<ListItemIcon><AssignmentOutlinedIcon /></ListItemIcon>
 					<ListItemText primary="Pembelian" />
-				</ListItem>
-				<ListItem button>
+				</MenuItem>
+				<MenuItem component={Link} to='/product'>
 					<ListItemIcon><LocalMallIcon /></ListItemIcon>
 					<ListItemText primary="Produk" />
-				</ListItem>
+				</MenuItem>
 			</List>
 			<Divider />
 			<List>
-				<ListItem button>
+				<MenuItem component={Link} to='/settings'>
 					<ListItemIcon><SettingsIcon /></ListItemIcon>
 					<ListItemText primary="Pengaturan" />
-				</ListItem>				
+				</MenuItem>
 			</List>
 		</div>
 	);
