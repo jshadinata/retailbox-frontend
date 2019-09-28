@@ -3,11 +3,12 @@ import {
 	BrowserRouter as Router,
 } from 'react-router-dom';
 import Dashboard from './Dashboard.js';
+import Login from './Login.js';
 
-function App() {  
-  return (
+function App({isAuthenticated}) {  
+	return (
   	<Router>
-	    <Dashboard />
+  		{(isAuthenticated) ? <Dashboard /> : <Login />}
     </Router>
   );
 }
