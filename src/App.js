@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
 	BrowserRouter as Router,
 } from 'react-router-dom';
 import Dashboard from './Dashboard.js';
 import Login from './Login.js';
+import { AuthContext, useAuth } from './context/Auth.js';
 
-function App({isAuthenticated}) {  
+function App({isAuthenticated}) {  	
+	const auth = useAuth();
 	return (
   	<Router>
-  		{(isAuthenticated) ? <Dashboard /> : <Login />}
+  		<AuthContext.Provider value={{ isLogged : auth.isLogged, login : auth.login, logout : auth.logout }}>
+  			{(auth.isLogged) ? <Dashboard /> : <Login />}
+  		</AuthContext.Provider>
     </Router>
   );
 }

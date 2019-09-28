@@ -2,6 +2,8 @@ import React from 'react';
 import {
 	AppBar,
 	Avatar,
+	Button,
+	Box,
 	CssBaseline,
 	Drawer,
 	Hidden,
@@ -78,8 +80,11 @@ function Dashboard() {
 	          </IconButton>
 	          <Typography variant="h6" noWrap className={classes.title}>
 	            Retailbox
-	          </Typography>
-	          <Avatar>U</Avatar>
+	          </Typography>	          
+	          <Button>
+		          <Avatar>U</Avatar>
+		          <Box ml={1}><Typography>Username</Typography></Box>	          
+	          </Button>
 	        </Toolbar>
 	      </AppBar>
 
