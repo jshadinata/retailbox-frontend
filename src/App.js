@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { 
-	BrowserRouter as Router,
-} from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Dashboard from './Dashboard.js';
 import Login from './Login.js';
 import { AuthContext, useAuth } from './context/Auth.js';

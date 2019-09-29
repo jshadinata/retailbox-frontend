@@ -8,6 +8,8 @@ import {
 	Drawer,
 	Hidden,
 	IconButton,
+	Menu,
+	MenuItem,
 	Toolbar,
 	Typography,
 } from '@material-ui/core';
@@ -15,6 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Sidebar from './Sidebar.js';
 import { Route } from 'react-router-dom';
+import { AuthContext } from './context/Auth.js';
 
 const drawerWidth = 250;
 
@@ -53,6 +56,32 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+function UserAvatarMenu() {
+	
+	const [anchorEl, setAnchorEl] = React.useState(null);
+	const auth = React.useContext(AuthContext);
+
+	const handleClick = event => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	return (
+		<div>
+			<IconButton onClick={handleClick}>
+				<Avatar>U</Avatar>
+			</IconButton>
+			<Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+				<MenuItem>Profile</MenuItem>
+				<MenuItem onClick={auth.logout}>Logout</MenuItem>
+			</Menu>
+		</div>
+	);
+}
+
 function Dashboard() {  
   const classes = useStyles();
   const theme = useTheme();
@@ -69,6 +98,7 @@ function Dashboard() {
 	    	{/* App Bar */}
 	      <AppBar position="fixed" className={classes.appBar}>
 	        <Toolbar>
+	          
 	          <IconButton
 	            color="inherit"
 	            aria-label="open drawer"
@@ -78,13 +108,13 @@ function Dashboard() {
 	          >
 	            <MenuIcon />
 	          </IconButton>
+
 	          <Typography variant="h6" noWrap className={classes.title}>
 	            Retailbox
 	          </Typography>	          
-	          <Button>
-		          <Avatar>U</Avatar>
-		          <Box ml={1}><Typography>Username</Typography></Box>	          
-	          </Button>
+	          
+	          <UserAvatarMenu />
+	          
 	        </Toolbar>
 	      </AppBar>
 
