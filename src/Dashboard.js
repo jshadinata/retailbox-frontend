@@ -13,7 +13,10 @@ import {
 	Toolbar,
 	Typography,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { 
+	Menu as MenuIcon,
+	Person as PersonIcon, 
+} from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Sidebar from './Sidebar.js';
 import { Route } from 'react-router-dom';
@@ -71,12 +74,15 @@ function UserAvatarMenu() {
 
 	return (
 		<div>
-			<IconButton onClick={handleClick}>
-				<Avatar>U</Avatar>
-			</IconButton>
-			<Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+			<Button onClick={handleClick} color="inherit">
+				<Avatar>
+					<PersonIcon />
+				</Avatar>		
+				<Box ml={1} style={{textTransform:'none'}}>{ (auth.user) ? auth.user.username : 'loading username...' }</Box>		
+			</Button>
+			<Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>				
 				<MenuItem>Profile</MenuItem>
-				<MenuItem onClick={auth.logout}>Logout</MenuItem>
+				<MenuItem onClick={auth.logout}>Logout</MenuItem>				
 			</Menu>
 		</div>
 	);
@@ -152,8 +158,10 @@ function Dashboard() {
 	    	{/* Main Content */}
 	      <main className={classes.content}>
 	        <div className={classes.toolbar} />	        
+	        <Route path='/' exact component={() => (<h1>Dashboard</h1>)} />
 	        <Route path='/sales' component={() => (<h1>Penjualan</h1>)} />
 	        <Route path='/purchase' component={()=>(<h1>Pembelian</h1>)} />
+	        <Route path='/product' component={()=>(<h1>Produk</h1>)} />
 	      </main>
 	    </div>
   );

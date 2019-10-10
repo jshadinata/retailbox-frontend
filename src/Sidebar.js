@@ -19,6 +19,7 @@ import {
 	LocalMall as LocalMallIcon,
 	Home as HomeIcon,
 } from '@material-ui/icons';
+import { AuthContext } from './context/Auth.js';
 
 const useStyles = makeStyles({
 	companyLogo : {
@@ -28,16 +29,19 @@ const useStyles = makeStyles({
 });
 
 function Sidebar() {
+
 	const classes = useStyles();
+	
+	const auth = React.useContext(AuthContext);
 
 	return(
 		<div>
 			<Box m={3}>
 				<Grid container justify="center" alignItems="center">
-					<Avatar className={classes.companyLogo}>NP</Avatar>
+					<Avatar className={classes.companyLogo}>?</Avatar>
 				</Grid>
 				<Grid container justify="center">
-					<Typography variant="h5">Nama Perusahaan</Typography>
+					<Box mt={2}><Typography variant="h5">{ auth.user && auth.user.current_company ? auth.user.current_company.name : 'loading company...'}</Typography></Box>
 				</Grid>
 			</Box>
 			<Divider />
