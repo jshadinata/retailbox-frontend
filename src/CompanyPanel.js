@@ -10,18 +10,7 @@ export default function CompanyPanel() {
 
   const [isLoading, setLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
-  const [companies, setCompanies] = React.useState([
-    {
-      id: 1,
-      name: "Company A",
-      address: "somewhere in earth"
-    },
-    {
-      id: 2,
-      name: "Company B",
-      address: "only on net"
-    }
-  ]);
+  const [companies, setCompanies] = React.useState([]);
 
   async function fetchData() {
     setErrorMessage("");

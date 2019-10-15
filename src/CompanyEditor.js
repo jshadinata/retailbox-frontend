@@ -41,12 +41,12 @@ export default function CompanyEditor(props) {
     const resp = await CompanyController.getById(id);
     if (resp.data.result) {
       const c = resp.data.company;
-      setName(c.name);
-      setAddress(c.address);
-      setTelephone(c.telephone);
-      setEmail(c.email);
-      setWebsite(c.website);
-      setApiKey(c.api_key);
+      setName(c.name || '');
+      setAddress(c.address || '');
+      setTelephone(c.telephone || '' );
+      setEmail(c.email || '');
+      setWebsite(c.website || '');
+      setApiKey(c.api_key || '');
     } else {
       setErrorMessage(resp.data.message);
     }
@@ -79,13 +79,13 @@ export default function CompanyEditor(props) {
     } else {
       resp = await CompanyController.add(comp);
     }
+    setLoading(false);
     if (resp.data.result) {
       if (props.afterSubmit) props.afterSubmit(resp);
     } else {
       setErrorMessage(resp.data.message);
       setErrors(resp.data.errors);
     }
-    setLoading(false);
   };
 
   return (
