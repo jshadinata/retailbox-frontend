@@ -6,10 +6,7 @@ import { AuthContext, useAuth } from './context/Auth.js';
 
 
 function App({isAuthenticated}) {  	
-	const auth = useAuth();	
-	React.useEffect(() => {
-		// auth.ping();
-	})
+	const auth = useAuth();		
 	return (
   	<Router>
   		<AuthContext.Provider value={auth}>

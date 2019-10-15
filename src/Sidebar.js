@@ -18,6 +18,7 @@ import {
 	AssignmentOutlined as AssignmentOutlinedIcon,
 	LocalMall as LocalMallIcon,
 	Home as HomeIcon,
+	Business as BusinessIcon,
 } from '@material-ui/icons';
 import { AuthContext } from './context/Auth.js';
 
@@ -38,10 +39,12 @@ function Sidebar() {
 		<div>
 			<Box m={3}>
 				<Grid container justify="center" alignItems="center">
-					<Avatar className={classes.companyLogo}>?</Avatar>
+					<Avatar className={classes.companyLogo}>
+						<BusinessIcon />
+					</Avatar>
 				</Grid>
 				<Grid container justify="center">
-					<Box mt={2}><Typography variant="h5">{ auth.user && auth.user.current_company ? auth.user.current_company.name : 'loading company...'}</Typography></Box>
+					<Box mt={2}><Typography variant="h5">{ auth.user && auth.user.current_company ? auth.user.current_company.name : '???'}</Typography></Box>
 				</Grid>
 			</Box>
 			<Divider />
@@ -62,6 +65,10 @@ function Sidebar() {
 					<ListItemIcon><LocalMallIcon /></ListItemIcon>
 					<ListItemText primary="Produk" />
 				</MenuItem>
+				<MenuItem component={Link} to='/company'>
+					<ListItemIcon><BusinessIcon /></ListItemIcon>
+					<ListItemText primary="Perusahaan" />
+				</MenuItem>
 			</List>
 			<Divider />
 			<List>
@@ -69,7 +76,7 @@ function Sidebar() {
 					<ListItemIcon><SettingsIcon /></ListItemIcon>
 					<ListItemText primary="Pengaturan" />
 				</MenuItem>
-			</List>
+			</List>			
 		</div>
 	);
 }

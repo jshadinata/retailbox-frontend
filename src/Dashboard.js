@@ -18,9 +18,10 @@ import {
 	Person as PersonIcon, 
 } from '@material-ui/icons';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Sidebar from './Sidebar.js';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { AuthContext } from './context/Auth.js';
+import Sidebar from './Sidebar.js';
+import CompanyPanel from './CompanyPanel.js';
 
 const drawerWidth = 250;
 
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 function UserAvatarMenu() {
 	
 	const [anchorEl, setAnchorEl] = React.useState(null);
-	const auth = React.useContext(AuthContext);
+	const auth = React.useContext(AuthContext);	
 
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget);
@@ -158,10 +159,13 @@ function Dashboard() {
 	    	{/* Main Content */}
 	      <main className={classes.content}>
 	        <div className={classes.toolbar} />	        
-	        <Route path='/' exact component={() => (<h1>Dashboard</h1>)} />
-	        <Route path='/sales' component={() => (<h1>Penjualan</h1>)} />
-	        <Route path='/purchase' component={()=>(<h1>Pembelian</h1>)} />
-	        <Route path='/product' component={()=>(<h1>Produk</h1>)} />
+	        <Switch>
+		        <Route path='/' exact component={() => (<h1>Dashboard</h1>)} />
+		        <Route path='/sales' component={() => (<h1>Penjualan</h1>)} />
+		        <Route path='/purchase' component={()=>(<h1>Pembelian</h1>)} />
+		        <Route path='/product' component={()=>(<h1>Produk</h1>)} />
+		        <Route path='/company' component={CompanyPanel} />
+	        </Switch>
 	      </main>
 	    </div>
   );
