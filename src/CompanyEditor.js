@@ -86,7 +86,7 @@ export default function CompanyEditor(props) {
       if (props.afterSubmit) props.afterSubmit(resp);
     } else {
       setErrorMessage(resp.data.message);
-      setErrors(resp.data.errors);
+      if ("errors" in resp.data) setErrors(resp.data.errors);
     }
   };
 
