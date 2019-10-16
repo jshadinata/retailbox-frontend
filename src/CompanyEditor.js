@@ -25,6 +25,8 @@ export default function CompanyEditor(props) {
   const classes = useStyles();
   const history = useHistory();
   const { id } = useParams();
+
+  // state
   const [isLoading, setLoading] = React.useState(false);
   const [name, setName] = React.useState("");
   const [address, setAddress] = React.useState("");
@@ -41,12 +43,12 @@ export default function CompanyEditor(props) {
     const resp = await CompanyController.getById(id);
     if (resp.data.result) {
       const c = resp.data.company;
-      setName(c.name || '');
-      setAddress(c.address || '');
-      setPhone(c.phone || '' );
-      setEmail(c.email || '');
-      setWebsite(c.website || '');
-      setApiKey(c.api_key || '');
+      setName(c.name || "");
+      setAddress(c.address || "");
+      setPhone(c.phone || "");
+      setEmail(c.email || "");
+      setWebsite(c.website || "");
+      setApiKey(c.api_key || "");
     } else {
       setErrorMessage(resp.data.message);
     }
@@ -107,7 +109,6 @@ export default function CompanyEditor(props) {
                 fullWidth
                 value={name}
                 onChange={e => setName(e.target.value)}
-                variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}
                 error={"name" in errors}
@@ -121,7 +122,6 @@ export default function CompanyEditor(props) {
                 fullWidth
                 value={address}
                 onChange={e => setAddress(e.target.value)}
-                variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}
               />
@@ -133,7 +133,6 @@ export default function CompanyEditor(props) {
                 fullWidth
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
-                variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}
               />
@@ -145,7 +144,6 @@ export default function CompanyEditor(props) {
                 fullWidth
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}
               />
@@ -157,7 +155,6 @@ export default function CompanyEditor(props) {
                 fullWidth
                 value={website}
                 onChange={e => setWebsite(e.target.value)}
-                variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}
               />
@@ -169,7 +166,6 @@ export default function CompanyEditor(props) {
                 fullWidth
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
-                variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}
               />

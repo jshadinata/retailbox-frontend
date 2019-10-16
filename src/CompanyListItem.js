@@ -39,7 +39,7 @@ export default function CompanyListItem({ company, selectCompany }) {
           onClose={handleClose}
         >
           <MenuItem component={Link} to={"/company/edit/" + company.id}>
-            Ubah
+            Detail
           </MenuItem>
           <MenuItem>Members</MenuItem>
         </Menu>
