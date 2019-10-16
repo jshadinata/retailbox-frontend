@@ -28,7 +28,7 @@ export default function CompanyEditor(props) {
   const [isLoading, setLoading] = React.useState(false);
   const [name, setName] = React.useState("");
   const [address, setAddress] = React.useState("");
-  const [telephone, setTelephone] = React.useState("");
+  const [phone, setPhone] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [website, setWebsite] = React.useState("");
   const [apiKey, setApiKey] = React.useState("");
@@ -43,7 +43,7 @@ export default function CompanyEditor(props) {
       const c = resp.data.company;
       setName(c.name || '');
       setAddress(c.address || '');
-      setTelephone(c.telephone || '' );
+      setPhone(c.phone || '' );
       setEmail(c.email || '');
       setWebsite(c.website || '');
       setApiKey(c.api_key || '');
@@ -68,7 +68,7 @@ export default function CompanyEditor(props) {
     const comp = {
       name: name,
       address: address,
-      telephone: telephone,
+      phone: phone,
       email: email,
       website: website,
       apiKey: apiKey
@@ -129,10 +129,10 @@ export default function CompanyEditor(props) {
 
             <Grid item xs={12}>
               <TextField
-                label="Telepon"
+                label="Phone"
                 fullWidth
-                value={telephone}
-                onChange={e => setTelephone(e.target.value)}
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
                 variant="outlined"
                 className={classes.textField}
                 disabled={isLoading}

@@ -14,12 +14,12 @@ export const CompanyController = {
     return resp;
   },
 
-  add: async ({ name, address, telephone, email, website, apiKey }) => {
+  add: async ({ name, address, phone, email, website, apiKey }) => {
     const url = API_URL + "/companies/add";
     const data = {
       name: name,
       address: address,
-      telephone: telephone,
+      phone: phone,
       email: email,
       website: website,
       api_key: apiKey
@@ -28,12 +28,12 @@ export const CompanyController = {
     return resp;
   },
 
-  update: async (id, { name, address, telephone, email, website, apiKey }) => {
+  update: async (id, { name, address, phone, email, website, apiKey }) => {
     const url = API_URL + "/companies/edit/" + id;
     const data = {
       name: name,
       address: address,
-      telephone: telephone,
+      phone: phone,
       email: email,
       website: website,
       api_key: apiKey
