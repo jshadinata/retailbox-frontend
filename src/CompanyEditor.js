@@ -28,6 +28,7 @@ export default function CompanyEditor(props) {
 
   // state
   const [isLoading, setLoading] = React.useState(false);
+  const [hasOwnerKey, setHasOwnerKey] = React.useState(true);
   const [name, setName] = React.useState("");
   const [address, setAddress] = React.useState("");
   const [phone, setPhone] = React.useState("");
@@ -43,6 +44,12 @@ export default function CompanyEditor(props) {
     const resp = await CompanyController.getById(id);
     if (resp.data.result) {
       const c = resp.data.company;
+
+      // check has owner key
+      const hok = c.users[0]._joinData.user_rights.includes(":0:");
+      setHasOwnerKey(hok);
+
+      // company fields
       setName(c.name || "");
       setAddress(c.address || "");
       setPhone(c.phone || "");
@@ -110,7 +117,7 @@ export default function CompanyEditor(props) {
                 value={name}
                 onChange={e => setName(e.target.value)}
                 className={classes.textField}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
                 error={"name" in errors}
                 helperText={"name" in errors ? errors.name : null}
               />
@@ -123,7 +130,7 @@ export default function CompanyEditor(props) {
                 value={address}
                 onChange={e => setAddress(e.target.value)}
                 className={classes.textField}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
               />
             </Grid>
 
@@ -134,7 +141,7 @@ export default function CompanyEditor(props) {
                 value={phone}
                 onChange={e => setPhone(e.target.value)}
                 className={classes.textField}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
               />
             </Grid>
 
@@ -145,7 +152,7 @@ export default function CompanyEditor(props) {
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 className={classes.textField}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
               />
             </Grid>
 
@@ -156,7 +163,7 @@ export default function CompanyEditor(props) {
                 value={website}
                 onChange={e => setWebsite(e.target.value)}
                 className={classes.textField}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
               />
             </Grid>
 
@@ -167,7 +174,7 @@ export default function CompanyEditor(props) {
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
                 className={classes.textField}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
               />
             </Grid>
 
@@ -178,7 +185,7 @@ export default function CompanyEditor(props) {
                 className={classes.button}
                 type="submit"
                 onClick={handleSubmit}
-                disabled={isLoading}
+                disabled={!hasOwnerKey || isLoading}
               >
                 Simpan
               </Button>
