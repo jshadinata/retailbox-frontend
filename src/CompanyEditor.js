@@ -2,12 +2,20 @@ import React from "react";
 import {
   Button,
   Box,
+  FormControl,
+  FormHelperText,
   Grid,
+  IconButton,
+  Input,
+  InputAdornment,
+  InputLabel,
   Paper,
   TextField,
   Typography,
   LinearProgress
 } from "@material-ui/core";
+import CasinoIcon from "@material-ui/icons/Casino";
+import ClearIcon from "@material-ui/icons/Clear";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, useParams } from "react-router-dom";
 import { CompanyController } from "./Controller.js";
@@ -68,6 +76,23 @@ export default function CompanyEditor(props) {
       fetchData(id);
     }
   }, [id]);
+
+  const handleClearApiKey = e => {
+    setApiKey("");
+  };
+
+  const handleRandomApiKey = e => {
+    // random token
+    const tokenLength = 64;
+    let token = "";
+    while (token.length < tokenLength) {
+      token += Math.random()
+        .toString(36) // to base-36
+        .substr(2); // remove 0.
+    }
+    token = token.substr(0, tokenLength);
+    setApiKey(token);
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -168,14 +193,38 @@ export default function CompanyEditor(props) {
             </Grid>
 
             <Grid item xs={12}>
-              <TextField
-                label="API Key"
-                fullWidth
-                value={apiKey}
-                onChange={e => setApiKey(e.target.value)}
+              <FormControl
                 className={classes.textField}
+                fullWidth
                 disabled={!hasOwnerKey || isLoading}
-              />
+                error={"api_key" in errors}
+                helperText={"api_key" in errors ? errors.api_key : null}
+              >
+                <InputLabel>API Key</InputLabel>
+                <Input
+                  value={apiKey}
+                  onChange={e => setApiKey(e.target.value)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        disabled={!hasOwnerKey || isLoading}
+                        onClick={handleClearApiKey}
+                      >
+                        <ClearIcon />
+                      </IconButton>
+                      <IconButton
+                        disabled={!hasOwnerKey || isLoading}
+                        onClick={handleRandomApiKey}
+                      >
+                        <CasinoIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+                {"api_key" in errors ? (
+                  <FormHelperText>{errors.api_key}</FormHelperText>
+                ) : null}
+              </FormControl>
             </Grid>
 
             <Grid item xs={12}>
